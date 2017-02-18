@@ -1,0 +1,121 @@
+var words = ["dragon", "puppy", "panda", "koala", "lion"];
+	chosenWord = ""; 
+	wordLetters = [];
+	numBlanks = 0; 
+	blanks = []; 
+	amtGuesses = 6; 
+	wrongAnswers = []; 
+	sameLetter = [];
+
+	winCounter = 0;
+	lossCounter = 0; 
+
+	document.getElementById("numWins").innerHTML = "Wins: " + winCounter; 
+	document.getElementById("numLoses").innerHTML = "Loses: " + lossCounter; 
+	document.getElementById("guessRemain").innerHTML = "Guesses Remaining: " + amtGuesses; 
+
+function playGame() {
+	blanks = [];
+	amtGuesses = 6;
+	wrongAnswers = [];
+	sameLetter = [];
+
+	chosenWord = words[Math.floor(Math.random() * words.length)]; 
+	console.log(chosenWord);
+
+	wordLetters = chosenWord.split(""); 
+	numBlanks = wordLetters.length; 
+	console.log(numBlanks);
+
+	for (var i = 0; i < numBlanks; i++) {
+		blanks.push("_")
+	}
+	console.log(blanks);
+
+	document.getElementById("letters").innerHTML = blanks.join(" "); 
+	document.getElementById("guessRemain").innerHTML = "Guesses Remaining: " + amtGuesses; 
+	document.getElementById("wrong-guess").innerHTML = "Wrong Guesses: " + wrongAnswers;
+}
+
+// playGame();
+
+function matchLetters(letter) {
+
+	// is letter in chosen word?
+	var chosenWordLetters = false; 
+
+	for ( i = 0; i < numBlanks; i++) {
+		if (chosenWord[i] === letter) {
+			chosenWordLetters = true; 
+		}
+	};
+
+	if (sameLetter.indexOf(letter) == -1) {
+		sameLetter.push(letter);
+		amtGuesses--;
+	}
+
+	if (chosenWordLetters) {
+		for(i = 0; i < numBlanks; i++) {
+			if (chosenWord[i] === letter) {
+				blanks[i] = letter; 
+			}
+		}
+		console.log("inside the matchLetters function: ", blanks);
+	}
+	else {
+
+		// only update amtGuesses if letter is NOT in the array yet
+
+		wrongAnswers.push(letter);
+		console.log("wrong guesses by user: ", wrongAnswers);
+	}
+};
+
+
+// matchLetters(); 
+
+function updateGameResults() {
+	// winCounter = 0;
+	// lossCounter = 0; 
+	console.log("blanks in updateGameResults", blanks)
+
+	document.getElementById("letters").innerHTML = blanks.join(" ");
+	document.getElementById("guessRemain").innerHTML =
+	"Guesses Remaining: " + amtGuesses; 
+	document.getElementById("wrong-guess").innerHTML = "Wrong Guesses: " + wrongAnswers.join(" ");
+
+
+	// if (blanks.indexOf(letter >= 1)) { 
+	// 	console.log(letter);
+	// }
+
+	if (wordLetters.join("") === blanks.join("")) {
+		winCounter++; 
+		alert("Congratulations! You win!");
+		document.getElementById("numWins").innerHTML = "Wins: " + winCounter;
+		playGame();
+	}
+	else if (amtGuesses === 0) {
+		lossCounter++; 
+		alert("Game Over");
+		document.getElementById("numLoses").innerHTML = 
+		"Loses: " + lossCounter;
+		playGame();
+	}
+};
+
+//function newGame() {
+// 	document.getElementById("")
+// }
+playGame(); 
+document.onkeyup = function(event) {
+	var userGuesses = String.fromCharCode(event.keyCode).toLowerCase(); 
+	console.log("user typed: ", userGuesses);
+	matchLetters(userGuesses);
+	updateGameResults();
+};
+
+
+
+
