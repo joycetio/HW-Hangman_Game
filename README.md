@@ -1,6 +1,9 @@
 # HW-Hangman_Game
 
-##Requirements: 
+## Live Link: 
+https://joycetio.github.io/HW-Hangman_Game/
+
+## Requirements: 
 1. Use key eventes to listen for the letters that players will type. 
 2. Display the following on the page: 
     -Press any key to get started! 
@@ -9,12 +12,12 @@
     -Letters Already Guessed 
 3. Alert user if he/she wins/loses. 
     
-##Technologies Used: 
--HTML 
--Bootstrap
--Javascript 
+## Technologies Used: 
+- HTML 
+- Bootstrap
+- Javascript 
 
-##Code Explanation: 
+## Code Explanation: 
 * Designed the page using Bootstrap in HTML.  
 * Javascript 
     * I created a function to make sure that the number of guesses remaining will not go down if the same letter is pressed by the player. 
