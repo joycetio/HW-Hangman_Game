@@ -4,7 +4,7 @@
 https://joycetio.github.io/HW-Hangman_Game/
 
 ## Requirements: 
-1. Use key eventes to listen for the letters that players will type. 
+1. Use key events to listen for the letters that players will type. 
 2. Display the following on the page: 
     -Press any key to get started! 
     -Wins (# of times user guessed the word correctly)
