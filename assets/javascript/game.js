@@ -21,7 +21,6 @@ function playGame() {
     sameLetter = [];
 
     chosenWord = words[Math.floor(Math.random() * words.length)];
-    // console.log(chosenWord);
 
     wordLetters = chosenWord.split("");
     numBlanks = wordLetters.length;
@@ -30,14 +29,12 @@ function playGame() {
     for (var i = 0; i < numBlanks; i++) {
         blanks.push("_")
     }
-    // console.log(blanks);
 
     document.getElementById("letters").innerHTML = blanks.join(" ");
     document.getElementById("guessRemain").innerHTML = "Guesses Remaining: " + amtGuesses;
     document.getElementById("wrong-guess").innerHTML = "Wrong Guesses: " + wrongAnswers;
 }
 
-// playGame();
 
 function matchLetters(letter) {
 
@@ -61,39 +58,23 @@ function matchLetters(letter) {
                 blanks[i] = letter;
             }
         }
-        // console.log("inside the matchLetters function: ", blanks);
     } else {
-
         // only update amtGuesses if letter is NOT in the array yet
-        
         //if letter is not inside wrongAnswers array, then update, if not, ignore. 
         if (wrongAnswers.indexOf(letter) === -1) {
         	wrongAnswers.push(letter);
         } else {
         	console.log("you already guessed that letter: " + letter);
         };
-        // wrongAnswers.push(letter);
-        // console.log("wrong guesses by user: ", wrongAnswers);
     }
 };
 
-
-// matchLetters(); 
-
 function updateGameResults() {
-    // winCounter = 0;
-    // lossCounter = 0; 
-    // console.log("blanks in updateGameResults", blanks)
 
     document.getElementById("letters").innerHTML = blanks.join(" ");
     document.getElementById("guessRemain").innerHTML =
         "Guesses Remaining: " + amtGuesses;
     document.getElementById("wrong-guess").innerHTML = "Wrong Guesses: " + wrongAnswers.join(" ");
-
-
-    // if (blanks.indexOf(letter >= 1)) { 
-    // 	console.log(letter);
-    // }
 
     if (wordLetters.join("") === blanks.join("")) {
         winCounter++;
@@ -109,13 +90,10 @@ function updateGameResults() {
     }
 };
 
-//function newGame() {
-// 	document.getElementById("")
-// }
 playGame();
 document.onkeyup = function(event) {
     var userGuesses = String.fromCharCode(event.keyCode).toLowerCase();
-    // console.log("user typed: ", userGuesses);
+
     matchLetters(userGuesses);
     updateGameResults();
 };
